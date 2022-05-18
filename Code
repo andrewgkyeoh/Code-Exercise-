@@ -1,0 +1,35 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    int charToInt(char c){
+	int num = 0;
+	num = c - '0';
+	return num;
+    }
+
+    char * A = "thi121s!!!is!!!Gre2132ta!!!!ifwih!!!213123";
+    char * n = "!!!";
+    int sum[100]={0};
+    int cnt=0;
+
+    while (strstr(A,n)){
+        for(int i=0;i<strstr(A,n)-A;++i){
+            if(A[i]>='0'&&A[i]<='9'){
+            sum[cnt]=sum[cnt] + charToInt(A[i]);
+            }
+        }
+        printf("S:%d\n",sum[cnt]);
+        cnt = cnt+1;
+        printf("%.*s\n", strstr(A,n)-A, A);
+        A = strstr(A,n) +3;
+    }
+    printf("%s\n",A);
+    for(int i=0;i<sizeof(A);++i){
+            if(A[i]>='0'&&A[i]<='9'){
+            sum[cnt]=sum[cnt] + charToInt(A[i]);
+            }
+    }
+    printf("S:%d\n",sum[cnt]);
+}
