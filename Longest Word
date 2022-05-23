@@ -1,0 +1,39 @@
+// Online C compiler to run C program online
+// Online C compiler to run C program online
+#include <stdio.h>
+#include <string.h>
+
+void LongestWord(char * sen) {
+  char * tmp;    
+  int c = 0;
+  int i0 = 0;
+  int c0 = 0;
+  
+    for (int j=0;j<=strlen(sen);++j){ //legit
+        if((sen[j]>='0'&&sen[j]<='9')||(sen[j]>='A'&&sen[j]<='Z')||(sen[j]>='a'&&sen[j]<='z')){
+                c = c+1;
+//                printf("(1)i:%d i0:%d c0:%d \n", j,i0, c0);
+        }
+        else { //non-legit
+            if(c>c0){
+                i0=j-c;   
+                c0 = c;
+                c=0;
+            }
+            c =0;
+//            printf("(2)i:%d i0:%d cnt:%d \n ", j, i0, c0);
+        }
+    }
+    printf("\n");
+  // code goes here  
+  printf("OUT %.*s", c0, sen+i0);
+}
+
+int main(void) { 
+   
+  // keep this function call here
+  char * A = "123 3 dasdasd@@**!@?/' qweqwesd123 as31231231231d1";
+  LongestWord(A);
+  return 0;
+    
+}
