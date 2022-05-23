@@ -14,7 +14,6 @@
                             ++qc;
                             continue;}
                         if (str[j] >='0'&& str[j]<='9'){
-//                              printf("IF1 i:%d j:%d \n" , i, j);                            
                             if (str[i]-'0' +str[j]-'0'==10){
 //                              printf("IF2 i:%d j:%d \n" , i, j);
                                 if(qc!=3){
@@ -23,18 +22,10 @@
                                 tru = 1; 
                                 i = j-1;
                                 break;}
-                            else { // !=10
-//                              printf("ignore2\n");
-                                i=j;
-                                break;}
+                            i=j;
                             break;}
-                    if (j==strlen(str)-1){
-                        printf("false");
-                        return 0;}            
-                    }
-            }
-
-        }
+                        }
+        }}
         if (tru){printf("true\n");}
         else {printf("false\n");}
     }
