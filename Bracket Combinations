@@ -1,0 +1,63 @@
+#include <stdio.h> 
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+char * int_to_b(unsigned int tmp) {
+    char* str = malloc(1*sizeof(char));//need big alloc for input >12
+    char r[1000];
+    int i=0;
+    while (tmp>0){
+            if (tmp == 0){tmp =0;}
+            if (tmp == 1){tmp =1;} 
+            r[i]=tmp%2; 
+            tmp=tmp/2; 
+            ++i;}
+    int j=0;
+    for( i=i-1;i>=0;i--){
+        str[j]= r[i] + '0';
+        j = j+1;
+    }
+    str[j] = '\0';
+    return str;
+}
+
+void BracketCombinations(unsigned int a){
+    unsigned int c = pow(2,a*2);
+    int cc = 0;
+    for (unsigned int i=pow(2,(a*2)-1) ; i<c ; ++i){
+        char * strA = int_to_b(i);
+        if(BracketMatcher(strA)==1){
+        ++cc; 
+      }
+    }
+   printf("%d", cc);
+}
+
+int BracketMatcher(char * strC) {
+    int c =0;
+//int cc =0;//option to count pair
+    for (int i=0;i<strlen(strC);++i){ 
+        if(c<0){
+            break;
+        }
+        if(strC[i]=='1'){
+            strC[i]='('; //option to show config
+            c=c+1;}
+        if(strC[i]=='0'){
+            strC[i]=')'; //option to show config
+            c=c-1;}
+    }
+  if(c==0){
+      //++cc;  //option to count pair    
+      //printf("%s\n",strC);//option to show config
+      return 1;
+      }
+   else return 0;
+}
+
+int main(void) { 
+  BracketCombinations(coderbyteInternalStdinFunction(stdin));
+  return 0;
+    
+}
