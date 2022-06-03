@@ -8,7 +8,8 @@ int min(int S[], int as){
         m=S[i];
     }
   }
-   return m;
+  if(m<0){return 0;}
+  else return m;
 }
 
 int max(int S[], int as){
@@ -27,12 +28,13 @@ void MinWindowSubstring(char * strArr[], int arrLength) {
   int B[Blen][Alen];
   int c[Blen];
   int d[Blen];
-  for (int i=0;i<Blen;++i){
-  int k=0;
   int rep0=0;
   int rep1=0;  
-  int cnt;
-  
+
+    
+  for (int i=0;i<Blen;++i){
+  int cnt = 1;
+  int k=0;
     for (int j=i+1;j<Blen;++j){
         if (strArr[1][i]==strArr[1][j]){
             rep0=i;
@@ -41,18 +43,26 @@ void MinWindowSubstring(char * strArr[], int arrLength) {
     }
     printf("\n PreLoop in i:%d cnt:%d rep01:%d %d\n", i, cnt, rep0, rep1 );
     for (int j=0;j<Alen;++j){
-        if (cnt!=j&&strArr[0][j]==strArr[1][i]){
-            if(i==rep0&&j==rep1){
-                cnt=j;
+        if (strArr[0][j]==strArr[1][i]){
+            if (i==rep1&&cnt>0&&i!=0){//reg and cont
+                --cnt;
+                printf("*Loop break1 j:%d cnt:%d \n", j, cnt );
+                continue;
+            }
+            if(cnt==0&&i!=0){
+                if (i==rep0){//reg and cont
+                B[i][k]=j;
                 printf("*Loop break j:%d cnt:%d \n", j, cnt );
-                break;}
+                break;
+                }
+            }
         B[i][k]=j;
         ++k;
         --cnt;
             printf("*Loop in1 j:%d cnt:%d \n", j, cnt );
         continue;
         }
-        B[i][k]=51;
+       B[i][k]=51;
        ++k;
        printf(" Loop i:%d j:%d cnt:%d \n", i, j, cnt );
     }
@@ -61,8 +71,8 @@ void MinWindowSubstring(char * strArr[], int arrLength) {
     for (int i=0;i<Blen;++i){
         c[i]=min(B[i],Alen);
         d[i]=max(B[i],Alen);
-        printf("i:%d min %d ", i, c[i],Alen);
-        printf(" max %d \n", d[i],Alen);
+        printf("i:%d min %d ", i,c[i],Alen);
+        printf(" max %d \n",d[i],Alen);
     }
     int flagmin=0;
     int flagmax=0;
@@ -76,10 +86,9 @@ void MinWindowSubstring(char * strArr[], int arrLength) {
 }
 
 int main(void) { 
-  int S[]= {10,12,11,121,15,6,3,10};
-  int m=sizeof(S)/sizeof(S[0]);
+
   // keep this function call here
-  char * A[] = {"ahffaksfajeeubsne", "jefaa"};
+  char * A[] = {"aabdccdbcacd", "aad"};
   int arrLength = sizeof(A) / sizeof(*A);
 
   MinWindowSubstring(A, arrLength);
