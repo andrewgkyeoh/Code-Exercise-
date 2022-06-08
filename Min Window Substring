@@ -74,23 +74,40 @@ void MinWindowSubstring(char * strArr[], int arrLength) {
         printf("i:%d min %d ", i,c[i],Alen);
         printf(" max %d \n",d[i],Alen);
     }
+
     int flagmin=0;
     int flagmax=0;
+    
+    int mid = max(c,Blen)-min(d,Blen);
+    int lo = max(c,Blen)-min(c,Blen);
+    int hi = max(d,Blen)-min(d,Blen);
+    
+    if (lo+1>=Blen&&lo<=hi&&lo<=mid){
+        printf(" LO");
+        flagmin=min(c,Blen);
+        flagmax=max(c,Blen);
+    }
+    else if (hi+1>=Blen&&hi<lo&&lo<mid){
+        printf(" HI");
+        flagmin=min(d,Blen);
+        flagmax=max(d,Blen);
+    }
+    else{
+        printf(" ELSE");
     flagmax = max(c,Blen);
     flagmin = min(d,Blen);
+    }
        printf(" Dmin %d \n", flagmin);
        printf(" Dmax %d \n", flagmax);
+    
     for (int k=flagmin;k<=flagmax;++k){
         printf("%c",strArr[0][k]);
-    }        
+    }
 }
 
 int main(void) { 
-
-  // keep this function call here
-  char * A[] = {"aabdccdbcacd", "aad"};
+  char * A[] = {"bdcacdbcacsg", "caad"};
   int arrLength = sizeof(A) / sizeof(*A);
-
   MinWindowSubstring(A, arrLength);
   return 0;
     
