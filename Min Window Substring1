@@ -1,0 +1,83 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int x, y;
+void Submain(char * strArr[]){
+  // code goes here  
+  char* str = (char*)malloc(sizeof(char)*strlen(strArr[0]));
+  strcpy(str,strArr[0]);
+  char* ptr = str;
+
+  char* sub = (char*)malloc(sizeof(char)*strlen(strArr[1]));
+  strcpy(sub,strArr[1]);
+  char* pub = sub;
+
+  int len_min = strlen(strArr[0]);
+  int len_min_index = 0;
+  int len_index = 0;
+  int len_ctr=0;
+  
+  int pub_ctr = strlen(strArr[1]);
+  printf("%d\n",pub_ctr);
+  //printf("%s\n",str);
+  //printf("ptr=%s \n",ptr+1);
+  //printf("%c\n",(ptr+1)[0]);
+
+  for ( ; ptr[0]!='\0'; len_index++){//reducing the dest str length loop
+    ptr=str+len_index;//reduce ptr len by increasing its pointer
+    //printf("**ptr=%s \n",ptr);
+    if(strlen(ptr)<strlen(sub)) break;//search strlen > target
+    strcpy(sub,strArr[1]);
+    pub_ctr = strlen(strArr[1]);//reset search char count
+    len_ctr=0;
+    for(x=0; x<strlen(ptr); x++){//loop of dest str by char
+      for(y=0; y<strlen(sub); y++){//loop of search str by char
+        printf("y=%d x=%d\n",y,x);
+        if(ptr[x]==pub[y]){ //match search char with dest str char 
+          pub_ctr--; //reduce search char count ; initial = search strlen
+          pub[y]='0'; //substitute search char with '0'
+    //      printf("y=%d-%s-%s\n",y,ptr,pub);
+          break; //get off this loop
+        }
+      }
+        printf("pub_ctr %d\n",pub_ctr);  
+      if(pub_ctr<strlen(strArr[1])){ //only not true on first search char, need to figure this out
+        len_ctr++;// increase result index with every x
+        if(pub_ctr==0){ //if rev_search strlen=0; end of matching all
+          printf(">>>>>>>>>len_index=%d-len_ctr=%d\n",len_index,len_ctr);
+          if(len_ctr<len_min){ //if lenctr < result min strlen
+            len_min = len_ctr; //set result min strlen
+            len_min_index = len_index;//set start point
+            break;
+          }
+        }
+      }
+      else break; 
+    }
+  //  printf("%s %d %d\n",ptr, len_min, len_min_index);
+  }
+  printf("%d\n", len_min);
+  printf("%d\n", len_min_index);
+  (str+len_min_index+len_min)[0] = '\0';
+  printf("%s\n",str);
+  printf("%s\n",str+len_min_index);
+
+
+  free(str);
+  free(sub);
+}
+int main(void) { 
+   
+  // keep this function call here
+  char * A[] = {"aabdccdbcxacbd", "axbb"};
+  int arrLength = sizeof(A) / sizeof(*A);
+  Submain(A);
+  int s[]={10,2,14,1,2,6,1};
+  int n = sizeof(s)/sizeof(s[0]); //size of array
+  //printf("%d\n",max(s, n));
+  //printf("%d\n",min(s, n));
+  return 0;
+    
+}
