@@ -1,0 +1,62 @@
+#include <stdio.h> 
+#include <string.h>
+#include <stdlib.h> 
+
+void TreeConstructor(char * strArr[], int arrLength) {
+      
+  int ana[2][arrLength];
+  int flag=0;
+  for (int x=0;x<arrLength;++x){
+    const char *str = strArr[x];
+    int b=0;
+    char k[6];
+    for (int i=1;i<strlen(str);++i){
+        k[i-1-b]=str[i];
+      if (strArr[x][i]==','){
+        b=i;
+        k[i-1]='\0';
+        ana[0][x]=atoi(k);
+//        printf("da %d ", ana[0][x]);
+        continue;}
+      if (strArr[x][i]==')'){
+        k[i-1]='\0';
+        ana[1][x]=atoi(k);
+//        printf("ds %d \n", ana[1][x]);
+    }
+    }
+    }
+    
+  
+  for (int x=0;x<arrLength;++x){
+    int cnt = 0;
+    for (int y=0;y<arrLength;++y){
+      if(x!=y&&ana[0][x] == ana[0][y]){
+        printf("false");
+        return;
+      }
+      if(x!=y&&ana[1][x] == ana[1][y]){
+        cnt++;
+        if (cnt>1 ){
+          printf("false");
+        return;}
+//        for (int z=0;z<arrLength;++z){
+//          if(ana[0][z] == ana[1][y]){flag=1;};
+//        }
+      }
+    }
+  
+
+  }
+      printf("true");
+}
+
+
+int main(void) { 
+   
+  // keep this function call here
+  char * A[] = coderbyteInternalStdinFunction(stdin);
+  int arrLength = sizeof(A) / sizeof(*A);
+  TreeConstructor(A, arrLength);
+  return 0;
+    
+}
