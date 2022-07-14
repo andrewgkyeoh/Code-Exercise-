@@ -1,0 +1,56 @@
+#include <stdio.h> 
+#include <string.h>
+
+void FindIntersection(char * strArr[], int arrLength) {
+    int ana[2][16];
+    int res[16];
+    int j;
+  for (int x=0;x<arrLength;++x){
+    const char *str = strArr[x];
+    int b=0;
+    j=0;
+    char k[6];
+    for (int i=0;i<strlen(str);++i){
+        k[i-b]=str[i];
+      if (strArr[x][i]==','||i==strlen(str)-1){        
+        if (i!=strlen(str)-1){k[i-b]='\0';}
+        ana[x][j]=atoi(k);
+//        printf("%d %d \n", x, ana[x][j]);
+        
+        b=i+1;
+        ++j;
+      }
+    }
+  }
+  int s=0;
+  for (int e=0;e<j;++e){
+    for (int h=0;h<j;++h){
+      if (ana[0][e]==ana[1][h]){
+        res[s]=ana[0][e];
+        ++s;
+      }
+    }
+  }    
+    
+  for (int q=0;q<s;++q){
+    printf("%d", res[q]);
+    if (q!=s-1){ printf(",");}
+  }
+
+
+  
+  
+  // code goes here  
+  //printf("%s", strArr[0]);
+
+}
+
+int main(void) { 
+   
+  // keep this function call here
+  char * A[] = coderbyteInternalStdinFunction(stdin);
+  int arrLength = sizeof(A) / sizeof(*A);
+  FindIntersection(A, arrLength);
+  return 0;
+    
+}
